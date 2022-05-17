@@ -1,17 +1,11 @@
-FROM node:alpine
+FROM node:alpine AS frontend
 
 WORKDIR /front-end
 
-COPY package*.json ./
-
-RUN npm install
+ADD ./node_modules.tar.gz ./
 
 COPY . .
 
 EXPOSE 3000
 
-ADD node_modules.tar.gz ./
-
-ENTRYPOINT ["npm"]
-
-CMD ["start"]
+CMD ["npm", "start"]
